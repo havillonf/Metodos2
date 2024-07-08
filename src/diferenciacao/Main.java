@@ -1,4 +1,4 @@
-package Atividade1;
+package diferenciacao;
 import static java.lang.Math.*;
 
 public class Main {
