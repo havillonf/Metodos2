@@ -1,6 +1,6 @@
 package autovalores;
 
-public class Main {
+public class PotenciaRegular {
 
     public static void main(String[] args) {
         // implementação para o método da potência regular - tarefa 10
@@ -15,7 +15,9 @@ public class Main {
         double[] vA1 = {1.0, 1.0, 1.0};
 
         System.out.println("Matriz A1: ");
-        potenciaRegular(matrizA1, vA1, tolerancia);
+        Resposta r1 = potenciaRegular(matrizA1, vA1, tolerancia);
+        printResposta(r1);
+
 
         // matriz A2
         double[][] matrizA2 = { {40.0,  8.0,  4.0,  2.0, 1.0},
@@ -25,12 +27,13 @@ public class Main {
                                 { 1.0,  2.0,  2.0,  4.0, 5.0} };
 
         double[] vA2 = {1.0, 1.0, 1.0, 1.0, 1.0};
-        
+
         System.out.println("\nMatriz A2: ");
-        potenciaRegular(matrizA2, vA2, tolerancia);
+        Resposta r2 = potenciaRegular(matrizA2, vA2, tolerancia);
+        printResposta(r2);
     }
 
-    public static void potenciaRegular(double[][] matrizA, double[] v0, double tolerancia) {
+    public static Resposta potenciaRegular(double[][] matrizA, double[] v0, double tolerancia) {
         // dados iniciais: matriz do problema, vetor arbitrario e tolerancia do erro
 
         double erro = 100.0;
@@ -44,10 +47,9 @@ public class Main {
 
         double[] x1Velho = {0.0, 0.0, 0.0, 0.0, 0.0};
 
-        // int cont = 0;
 
         while(erro > tolerancia){
-            // atualizar as variaveis 
+            // atualizar as variaveis
             double lambda1Velho = lambda1Novo;
             vkVelho = vkNovo;
 
@@ -63,23 +65,9 @@ public class Main {
             // verificar convergência
             erro = Math.abs((lambda1Novo - lambda1Velho)/lambda1Novo);
 
-            // cont++;
-
-            // System.out.println("Iteração " + cont);
-            // System.out.println("Lambda 1 novo: " + lambda1Novo);
-            // System.out.println("Lambda 1 velho: " + lambda1Velho);
-            // System.out.println("Erro novo: " + erro);
-            // System.out.println("");
         }
 
-        System.out.println("Resultados: ");
-        System.out.println("Autovalor: " + lambda1Novo);
-        System.out.print("Autovetor: { ");
-        for(int i = 0; i < x1Velho.length; i++){
-            System.out.print(x1Velho[i] + " ");
-        }
-        System.out.print("}");
-        System.out.println();
+        return new Resposta(lambda1Novo, x1Velho);
     }
 
     public static double[] normalizar(double[] v){
@@ -100,13 +88,24 @@ public class Main {
     }
 
     public static double[] produtoMatrizVetor(double[][] A, double[] v){
-        
+
         double[] aux = new double[v.length];
-        
+
         for(int i = 0; i < A.length; i++){
             aux[i] = produtoEscalar(A[i], v);
         }
 
         return aux;
+    }
+
+    public static void printResposta(Resposta r){
+        System.out.println("Resultados: ");
+        System.out.println("Autovalor: " + r.autovalor);
+        System.out.print("Autovetor: { ");
+        for(int i = 0; i < r.autovetor.length; i++){
+            System.out.print(r.autovetor[i] + " ");
+        }
+        System.out.print("}");
+        System.out.println();
     }
 }   

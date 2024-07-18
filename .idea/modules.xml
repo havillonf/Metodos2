@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MN2.iml" filepath="$PROJECT_DIR$/MN2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/matriz-inversa.iml" filepath="$PROJECT_DIR$/matriz-inversa.iml" />
     </modules>
   </component>
 </project>
