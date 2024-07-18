@@ -14,7 +14,7 @@ public class PotenciaRegular {
 
         double[] vA1 = {1.0, 1.0, 1.0};
 
-        System.out.println("Matriz A1: ");
+        System.out.println("Matriz A1:");
         Resposta r1 = potenciaRegular(matrizA1, vA1, tolerancia);
         printResposta(r1);
 
@@ -28,7 +28,7 @@ public class PotenciaRegular {
 
         double[] vA2 = {1.0, 1.0, 1.0, 1.0, 1.0};
 
-        System.out.println("\nMatriz A2: ");
+        System.out.println("\nMatriz A2:");
         Resposta r2 = potenciaRegular(matrizA2, vA2, tolerancia);
         printResposta(r2);
     }
@@ -43,9 +43,9 @@ public class PotenciaRegular {
 
         // inicializar o vetor vkNovo
         double[] vkNovo = v0;
-        double[] vkVelho = {0.0, 0.0, 0.0, 0.0, 0.0};
+        double[] vkVelho;
 
-        double[] x1Velho = {0.0, 0.0, 0.0, 0.0, 0.0};
+        double[] x1Velho = null;
 
 
         while(erro > tolerancia){
@@ -99,7 +99,7 @@ public class PotenciaRegular {
     }
 
     public static void printResposta(Resposta r){
-        System.out.println("Resultados: ");
+        System.out.println("Resultados:");
         System.out.println("Autovalor: " + r.autovalor);
         System.out.print("Autovetor: { ");
         for(int i = 0; i < r.autovetor.length; i++){
