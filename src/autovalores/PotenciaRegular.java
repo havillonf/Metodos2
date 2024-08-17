@@ -1,4 +1,6 @@
-package autovalores;
+package src.autovalores;
+
+import autovalores.Resposta;
 
 public class PotenciaRegular {
 

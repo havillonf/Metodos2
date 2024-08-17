@@ -1,11 +1,13 @@
-package autovalores;
+package src.autovalores;
 
 import org.apache.commons.math3.linear.LUDecomposition;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 
-import static autovalores.PotenciaRegular.potenciaRegular;
-import static autovalores.PotenciaRegular.printResposta;
+import autovalores.Resposta;
+
+import static src.autovalores.PotenciaRegular.potenciaRegular;
+import static src.autovalores.PotenciaRegular.printResposta;
 
 public class PotenciaInversa {
 
