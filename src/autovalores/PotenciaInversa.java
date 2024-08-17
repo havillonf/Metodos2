@@ -4,8 +4,6 @@ import org.apache.commons.math3.linear.LUDecomposition;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 
-import autovalores.Resposta;
-
 import static src.autovalores.PotenciaRegular.potenciaRegular;
 import static src.autovalores.PotenciaRegular.printResposta;
 
@@ -24,7 +22,7 @@ public class PotenciaInversa {
         double[] vA1 = {1.0, 1.0, 1.0};
 
         System.out.println("Matriz A1: ");
-        Resposta r1 = potenciaInversa(matrizA1, vA1, tolerancia);
+        autovalores.RespostaPotencia r1 = potenciaInversa(matrizA1, vA1, tolerancia);
         printResposta(r1);
 
         // matriz A2
@@ -35,7 +33,7 @@ public class PotenciaInversa {
         double[] vA2 = {1.0, 1.0, 1.0};
         
         System.out.println("\nMatriz A2: ");
-        Resposta r2 = potenciaInversa(matrizA2, vA2, tolerancia);
+        autovalores.RespostaPotencia r2 = potenciaInversa(matrizA2, vA2, tolerancia);
         printResposta(r2);
 
         // matriz A3
@@ -48,12 +46,12 @@ public class PotenciaInversa {
         double[] vA3 = {1.0, 1.0, 1.0, 1.0, 1.0};
 
         System.out.println("\nMatriz A3: ");
-        Resposta r3 = potenciaInversa(matrizA3, vA3, tolerancia);
+        autovalores.RespostaPotencia r3 = potenciaInversa(matrizA3, vA3, tolerancia);
         printResposta(r3);
     }
 
-    public static Resposta potenciaInversa(double[][] matriz, double[] v, double tolerancia){
-        Resposta r = potenciaRegular(calcularInversa(matriz), v, tolerancia);
+    public static autovalores.RespostaPotencia potenciaInversa(double[][] matriz, double[] v, double tolerancia){
+        autovalores.RespostaPotencia r = potenciaRegular(calcularInversa(matriz), v, tolerancia);
         r.autovalor = 1/r.autovalor;
         return r;
     }

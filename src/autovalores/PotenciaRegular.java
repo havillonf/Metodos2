@@ -1,7 +1,5 @@
 package src.autovalores;
 
-import autovalores.Resposta;
-
 public class PotenciaRegular {
 
     public static void main(String[] args) {
@@ -17,7 +15,7 @@ public class PotenciaRegular {
         double[] vA1 = {1.0, 1.0, 1.0};
 
         System.out.println("Matriz A1:");
-        Resposta r1 = potenciaRegular(matrizA1, vA1, tolerancia);
+        autovalores.RespostaPotencia r1 = potenciaRegular(matrizA1, vA1, tolerancia);
         printResposta(r1);
 
 
@@ -31,11 +29,11 @@ public class PotenciaRegular {
         double[] vA2 = {1.0, 1.0, 1.0, 1.0, 1.0};
 
         System.out.println("\nMatriz A2:");
-        Resposta r2 = potenciaRegular(matrizA2, vA2, tolerancia);
+        autovalores.RespostaPotencia r2 = potenciaRegular(matrizA2, vA2, tolerancia);
         printResposta(r2);
     }
 
-    public static Resposta potenciaRegular(double[][] matrizA, double[] v0, double tolerancia) {
+    public static autovalores.RespostaPotencia potenciaRegular(double[][] matrizA, double[] v0, double tolerancia) {
         // dados iniciais: matriz do problema, vetor arbitrario e tolerancia do erro
 
         double erro = 100.0;
@@ -69,7 +67,7 @@ public class PotenciaRegular {
 
         }
 
-        return new Resposta(lambda1Novo, x1Velho);
+        return new autovalores.RespostaPotencia(lambda1Novo, x1Velho);
     }
 
     public static double[] normalizar(double[] v){
@@ -100,7 +98,7 @@ public class PotenciaRegular {
         return aux;
     }
 
-    public static void printResposta(Resposta r){
+    public static void printResposta(autovalores.RespostaPotencia r){
         System.out.println("Resultados:");
         System.out.println("Autovalor: " + r.autovalor);
         System.out.print("Autovetor: { ");

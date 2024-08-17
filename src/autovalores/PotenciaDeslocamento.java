@@ -1,7 +1,5 @@
 package src.autovalores;
 
-import autovalores.Resposta;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,14 +22,14 @@ public class PotenciaDeslocamento {
 
         System.out.println("Matriz A1: ");
 
-        List<Resposta> r1 = new ArrayList<>();
+        List<autovalores.RespostaPotencia> r1 = new ArrayList<>();
 
         for(int deslocamento = 1; deslocamento < 50; deslocamento+=5){
             r1.add(potenciaDeslocamento(matrizA1, vA1, tolerancia, deslocamento));
         }
 
-        for(Resposta resposta : r1){
-            printResposta(resposta);
+        for(autovalores.RespostaPotencia respostaPotencia : r1){
+            printResposta(respostaPotencia);
         }
 
 //        // matriz A2
@@ -59,9 +57,9 @@ public class PotenciaDeslocamento {
 //        printResposta(r3);
     }
 
-    public static Resposta potenciaDeslocamento(double[][] matriz, double[] vetor, double tolerancia, double deslocamento){
+    public static autovalores.RespostaPotencia potenciaDeslocamento(double[][] matriz, double[] vetor, double tolerancia, double deslocamento){
         double[][] matrizNova = matrizMenosEscalar(matriz, deslocamento);
-        Resposta valores = potenciaInversa(matrizNova, vetor, tolerancia);
+        autovalores.RespostaPotencia valores = potenciaInversa(matrizNova, vetor, tolerancia);
         valores.autovalor += deslocamento;
         return valores;
     }
