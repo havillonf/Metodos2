@@ -2,7 +2,6 @@ package src.autovalores;
 
 import java.util.Arrays;
 
-import static src.autovalores.PotenciaRegular.printResposta;
 import static src.autovalores.PotenciaRegular.produtoEscalar;
 
 public class Householder {
