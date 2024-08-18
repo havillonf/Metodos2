@@ -2,6 +2,7 @@ package src.autovalores;
 
 import java.util.Arrays;
 
+import static src.autovalores.PotenciaRegular.printResposta;
 import static src.autovalores.PotenciaRegular.produtoEscalar;
 
 public class Householder {
@@ -18,10 +19,18 @@ public class Householder {
         };
 
         Householder hh = new Householder(A, 5);
-        double[][][] result = hh.metodo();
+        RespostaHH result = hh.metodo();
 
-        System.out.println("MATRIZ TRIDIAGONAL\n\n" + Arrays.deepToString(result[0]));
-        System.out.println("\n\nMATRIZ H acumulada\n\n" + Arrays.deepToString(result[1]));
+        System.out.println("MATRIZ TRIDIAGONAL");
+        printMatriz(result.A_barra);
+        System.out.println("\n\nMATRIZ H acumulada");
+        printMatriz(result.H);
+    }
+
+    public static void printMatriz(double[][] matriz){
+        for (double[] lines : matriz) {
+            System.out.println(Arrays.toString(lines));
+        }
     }
 
     public Householder(double[][] matriz, int tam) {
@@ -29,7 +38,7 @@ public class Householder {
         this.tam = tam;
     }
 
-    public double[][][] metodo() {
+    public RespostaHH metodo() {
         double[][] H = identidade(tam);
         double[][] A_ant = a;
         double[][] A_barra = a;
@@ -42,7 +51,7 @@ public class Householder {
             H = multiplicar(H, H_i);
         }
 
-        return new double[][][]{A_barra, H};
+        return new RespostaHH(A_barra, H);
     }
 
     private double[][] matrizHouseholder(double[][] matriz, int i) {
