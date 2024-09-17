@@ -2,7 +2,7 @@ package src.newtonCotes;
 
 import java.util.Scanner;
 
-public class Main {
+public class NewtonCotes {
     public static double F(double x) {
         return 4*x + Math.pow(x, 3);
     }
@@ -19,16 +19,12 @@ public class Main {
         double integral;
         boolean executar = true;
         while(executar){
-            System.out.println("Execução " + numIteracoes);
             integral = 0;
             numIteracoes++;
             delta = (b-a)/N;
-            System.out.println("Delta: " + delta);
             for(int i = 0; i < N; i++){
                 Xi = a + i*delta;
                 Xf = Xi + delta;
-                System.out.println("Xi: " + Xi);
-                System.out.println("Xf: " + Xf);
                 if (abordagem == 1) { // Fechada
                     switch (grau) {
                         case 1:
@@ -65,7 +61,6 @@ public class Main {
             resultadoAnterior = resultado;
             resultado = integral;
             erro = Math.abs((resultado - resultadoAnterior)/resultado);
-            System.out.println("Erro: " + erro);
             if(erro < tolerancia || numIteracoes > 10){
                 executar = false;
             }
@@ -77,18 +72,18 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        double Xi, Xf;
+        double a, b;
         double tolerancia = 0.000001;
         int abordagem, grau;
 
         // Solicitar intervalos ao usuário
-        System.out.print("Informe o valor de Xi (início do intervalo): ");
-        Xi = scanner.nextDouble();
-        System.out.println(Xi);
+        System.out.print("Informe o valor de a (início do intervalo): ");
+        a = scanner.nextDouble();
+        System.out.println(a);
 
-        System.out.print("Informe o valor de Xf (fim do intervalo): ");
-        Xf = scanner.nextDouble();
-        System.out.println(Xf);
+        System.out.print("Informe o valor de b (fim do intervalo): ");
+        b = scanner.nextDouble();
+        System.out.println(b);
 
         // Menu para selecionar abordagem
         System.out.println("Selecione a abordagem de integração:");
@@ -101,7 +96,7 @@ public class Main {
         System.out.println("Selecione o grau da aproximação (1 a 4): ");
         grau = scanner.nextInt();
 
-        executarMetodo(Xi, Xf, tolerancia, abordagem, grau);
+        executarMetodo(a, b, tolerancia, abordagem, grau);
 
         scanner.close();
     }
