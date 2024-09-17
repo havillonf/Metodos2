@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static double F(double x) {
-        return Math.sin(x);
+        return 4*x + Math.pow(x, 3);
     }
 
     public static void executarMetodo(double a, double b, double tolerancia, int abordagem, int grau) {
@@ -19,51 +19,56 @@ public class Main {
         double integral;
         boolean executar = true;
         while(executar){
+            System.out.println("Execução " + numIteracoes);
             integral = 0;
             numIteracoes++;
             delta = (b-a)/N;
+            System.out.println("Delta: " + delta);
             for(int i = 0; i < N; i++){
                 Xi = a + i*delta;
                 Xf = Xi + delta;
+                System.out.println("Xi: " + Xi);
+                System.out.println("Xf: " + Xf);
                 if (abordagem == 1) { // Fechada
                     switch (grau) {
                         case 1:
-                            integral = fechada1(Xi, Xf);
+                            integral += fechada1(Xi, Xf);
                             break;
                         case 2:
-                            integral = fechada2(Xi, Xf);
+                            integral += fechada2(Xi, Xf);
                             break;
                         case 3:
-                            integral = fechada3(Xi, Xf);
+                            integral += fechada3(Xi, Xf);
                             break;
                         case 4:
-                            integral = fechada4(Xi, Xf);
+                            integral += fechada4(Xi, Xf);
                             break;
                     }
                 } else if (abordagem == 2) { // Aberta
                     switch (grau) {
                         case 1:
-                            integral = aberta1(Xi, Xf);
+                            integral += aberta1(Xi, Xf);
                             break;
                         case 2:
-                            integral = aberta2(Xi, Xf);
+                            integral += aberta2(Xi, Xf);
                             break;
                         case 3:
-                            integral = aberta3(Xi, Xf);
+                            integral += aberta3(Xi, Xf);
                             break;
                         case 4:
-                            integral = aberta4(Xi, Xf);
+                            integral += aberta4(Xi, Xf);
                             break;
                     }
                 }
             }
+            N *= 2;
             resultadoAnterior = resultado;
             resultado = integral;
-            erro = Math.abs((integral - resultadoAnterior)/integral);
-            if(erro < tolerancia){
+            erro = Math.abs((resultado - resultadoAnterior)/resultado);
+            System.out.println("Erro: " + erro);
+            if(erro < tolerancia || numIteracoes > 10){
                 executar = false;
             }
-            N *= 2;
         }
         System.out.println("Integral: " + resultado);
         System.out.println("Iterações: " + numIteracoes);
@@ -79,9 +84,11 @@ public class Main {
         // Solicitar intervalos ao usuário
         System.out.print("Informe o valor de Xi (início do intervalo): ");
         Xi = scanner.nextDouble();
+        System.out.println(Xi);
 
         System.out.print("Informe o valor de Xf (fim do intervalo): ");
         Xf = scanner.nextDouble();
+        System.out.println(Xf);
 
         // Menu para selecionar abordagem
         System.out.println("Selecione a abordagem de integração:");
