@@ -21,8 +21,9 @@ public class QR {
                 {2, 6, 1, 25, 4},
                 {1, 2, 2, 4, 5}
         };
+        double tolerancia = 0.0000001;
 
-        QR obj = new QR(A, 5, 0.0000001);
+        QR obj = new QR(A, 5, tolerancia);
         RespostaQR result = obj.metodo();
         double[][] P = result.P;
         double[] lamb = result.lambda;

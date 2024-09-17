@@ -24,7 +24,7 @@ public class PotenciaDeslocamento {
 
         List<autovalores.RespostaPotencia> r1 = new ArrayList<>();
 
-        for(int deslocamento = 1; deslocamento < 50; deslocamento+=5){
+        for(int deslocamento = 1; deslocamento < 25; deslocamento+=5){
             r1.add(potenciaDeslocamento(matrizA1, vA1, tolerancia, deslocamento));
         }
 
