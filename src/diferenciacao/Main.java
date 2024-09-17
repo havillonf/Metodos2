@@ -1,21 +1,71 @@
 package src.diferenciacao;
+import java.util.Scanner;
+
 import static java.lang.Math.*;
 
 public class Main {
     public static void main(String[] args) {
-        double deltaX = 0.5;
-        double x = 2;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Digite o xi: ");
+        double x = sc.nextDouble();
+
+        System.out.println("Digite o delta: ");
+        double deltaX = sc.nextDouble();
+
+        System.out.println("Derivada primeira, segunda ou terceira? (Digite 1, 2 ou 3)");
+        int ordem = sc.nextInt();
+
+        System.out.println("Digite c para central, b para backward e f para forward");
+        String filosofia = sc.next();
+
+
         double error = 1000.0;
-        double derivative;
+        double derivative = 0.0;
         double previousDerivative = 0.0;
         int i = 0;
         while(error > 0.00001 && i < 16){
-            derivative = secondDerivative(deltaX, x);
+            if(ordem == 1){
+                switch (filosofia){
+                    case "c":
+                        derivative = firstDerivativeCentral(x, deltaX);
+                        break;
+                    case "b":
+                        derivative = firstDerivativeBackward(x, deltaX);
+                        break;
+                    case "f":
+                        derivative = firstDerivativeForward(x, deltaX);
+                        break;
+                }
+            } else if(ordem == 2){
+                switch (filosofia){
+                    case "c":
+                        derivative = secondDerivativeCentral(x, deltaX);
+                        break;
+                    case "b":
+                        derivative = secondDerivativeBackward(x, deltaX);
+                        break;
+                    case "f":
+                        derivative = secondDerivativeForward(x, deltaX);
+                        break;
+                }
+            }else if(ordem == 3){
+                switch (filosofia){
+                    case "c":
+                        derivative = thirdDerivativeCentral(x, deltaX);
+                        break;
+                    case "b":
+                        derivative = thirdDerivativeBackward(x, deltaX);
+                        break;
+                    case "f":
+                        derivative = thirdDerivativeForward(x, deltaX);
+                        break;
+                }
+            }
             error = error(derivative, previousDerivative);
             System.out.print("i: " + i);
             System.out.print(" delta: (" + deltaX);
-            System.out.print(") - f''x: (" + secondDerivative(deltaX, x));
-            System.out.print(") - error: (" + error + ")");
+            System.out.print(") - derivada:  (" + derivative);
+            System.out.print(") - erro: (" + error + ")");
             System.out.println();
             previousDerivative = derivative;
             deltaX/=2;
@@ -26,14 +76,34 @@ public class Main {
     public static double fx(double x){
         return sqrt(pow(E, 3*x) + 4*pow(x,2));
     }
-    public static double secondDerivative(double deltaX, double x){
-        return 1/pow(deltaX,2) *
-                ((-5.0/2) * fx(x)
-                + (4.0/3) * fx(x + deltaX)
-                + (4.0/3) * fx(x - deltaX)
-                -(1.0/12) * fx(x + 2*deltaX)
-                -(1.0/12) * fx(x - 2*deltaX));
+    public static double firstDerivativeCentral(double x, double deltaX){
+        return (fx(x + deltaX) - fx(x - deltaX))/deltaX;
     }
+    public static double firstDerivativeBackward(double x, double deltaX){
+        return (fx(x) - fx(x - deltaX))/deltaX;
+    }
+    public static double firstDerivativeForward(double x, double deltaX){
+        return (fx(x + deltaX) - fx(x))/deltaX;
+    }
+    public static double secondDerivativeCentral(double x, double deltaX){
+        return (fx(x + deltaX) - 2.0 * fx(x) + fx(x - deltaX))/Math.pow(deltaX, 2.0);
+    }
+    public static double secondDerivativeBackward(double x, double deltaX){
+        return (fx(x) - 2.0*fx(x-deltaX) + fx(x - 2.0*deltaX))/Math.pow(deltaX, 2.0);
+    }
+    public static double secondDerivativeForward(double x, double deltaX){
+        return (fx(x + 2.0*deltaX) - 2.0 * fx(x + deltaX) + fx(x))/Math.pow(deltaX, 2.0);
+    }
+    public static double thirdDerivativeForward(double x, double deltaX){
+        return (-fx(x) + 3.0*fx(x + deltaX) - 3.0 * fx(x + 2.0*deltaX) + fx(x + 3.0*deltaX))/Math.pow(deltaX, 3.0);
+    }
+    public static double thirdDerivativeCentral(double x, double deltaX){
+        return (-(1.0/2.0) * fx(x-2.0*deltaX) + fx(x-deltaX) - fx(x+deltaX) + (1.0/2.0) * fx(x + 2.0*deltaX))/Math.pow(deltaX, 3.0);
+    }
+    public static double thirdDerivativeBackward(double x, double deltaX){
+        return (-fx(x - 3.0*deltaX) + 3.0*fx(x - 2.0*deltaX) -3.0 * fx(x - deltaX) + fx(x))/Math.pow(deltaX, 3.0);
+    }
+
     public static double error(double derivative, double previousDerivative){
         double er = (derivative - previousDerivative)/derivative;
         if(er > 0.0){
