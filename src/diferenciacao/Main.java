@@ -1,4 +1,4 @@
-package diferenciacao;
+package src.diferenciacao;
 import static java.lang.Math.*;
 
 public class Main {
